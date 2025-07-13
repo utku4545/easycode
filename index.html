@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasyCode - Ana Sayfa</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
+  <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 shadow">
+    <div class="flex items-center space-x-2">
+      <img src="assets/easycode-logo.png" alt="EasyCode Logo" class="h-8">
+      <h1 class="text-xl font-bold">EasyCode</h1>
+    </div>
+    <nav>
+      <a href="profile.html" class="text-sm px-4 py-2 bg-green-600 text-white rounded mr-2">Profil</a>
+      <button onclick="logout()" class="text-sm px-4 py-2 bg-red-500 text-white rounded">Çıkış Yap</button>
+    </nav>
+  </header>
+
+  <main class="max-w-4xl mx-auto mt-12 text-center">
+    <h2 class="text-3xl font-semibold mb-6">Hoş Geldin, <span id="username">Kullanıcı</span> 👋</h2>
+    <p class="mb-8">Kodlamayı öğrenmenin en kolay yoluna hoş geldin! EasyCode ile Python temellerini öğrenmeye hemen başlayabilirsin.</p>
+    <a href="lessons.html" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">Derslere Başla</a>
+  </main>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const user = JSON.parse(localStorage.getItem("easycode_user"));
+      if (user && user.displayName) {
+        document.getElementById("username").textContent = user.displayName;
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>
