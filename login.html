@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap - EasyCode</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/favicon.ico" />
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white flex justify-center items-center h-screen">
+  <div class="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">EasyCode Giriş</h2>
+    <form id="loginForm" class="space-y-4">
+      <input type="email" id="email" placeholder="E-posta" class="input" required />
+      <input type="password" id="password" placeholder="Şifre" class="input" required />
+      <button type="submit" class="btn-primary w-full">Giriş Yap</button>
+      <p class="text-sm text-center mt-4">Hesabın yok mu? <a href="register.html" class="text-blue-500 underline">Kayıt Ol</a></p>
+    </form>
+    <div id="errorMessage" class="text-red-500 text-sm mt-4 text-center hidden"></div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorDiv = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        await login(email, password);
+        window.location.href = 'index.html';
+      } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
